@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: user
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  data:
+    redis:
+      port: 6379
+      host: localhost
+      channels:
+        achievement: achievement_channel
+        follower: follower_channel
+        post: post_channel
+        like: like-channel
+        mentorship: mentorship_channel
+    kafka:
+      host: localhost
+      port: 9092
+      group: group
+      channels:
+        post_channel: post_channel
+
+server:
+  port: 8085
+
+logging:
+  level:
+    root: info
+
+project-service:
+  host: localhost
+  port: 8082
+
+achievement-titles:
+  leader: LEADER
+  all-love: ALL LOVE
+  sensei: SENSEI
+
+thread-pool:
+  fixed:
+    size: 5
